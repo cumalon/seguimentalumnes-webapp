@@ -1,5 +1,4 @@
-// NOTA: Aquesta funció s'ha mogut a config.js per mantenir la retrocompatibilitat
-// i suportar tant les noves pestanyes de configuració com la pestanya "webapp" antiga
+// NOTA: Aquesta funció s'ha mogut a config.js
 
 function getIndexPageName_() {
   return amIAdmin_()? "adminIndex" : "webapp"
@@ -23,8 +22,7 @@ function processUrls() {
   return processUrlsByEmail(userEmail);
 }
 
-// NOTA: Aquesta funció s'ha mogut a config.js per mantenir la retrocompatibilitat
-// i suportar tant les noves pestanyes de configuració com la pestanya "webapp" antiga
+// NOTA: Aquesta funció s'ha mogut a config.js
 
 function getUserEmail() {
   return Session.getActiveUser().getEmail(); // Obtenir l'email de l'usuari actual
@@ -36,5 +34,4 @@ function getUserName() {
     return name;
 }
 
-// NOTA: Aquesta funció s'ha mogut a config.js per mantenir la retrocompatibilitat
-// i suportar tant les noves pestanyes de configuració com la pestanya "webapp" antiga
+// NOTA: Aquesta funció s'ha mogut a config.js

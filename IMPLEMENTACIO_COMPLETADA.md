@@ -36,14 +36,7 @@ S'ha implementat amb èxit la millora de configuració de la webapp d'informes d
 - **Format**: Files alternades (blanc/gris clar)
 - **Dades d'exemple**: Un administrador de prova
 
-### 3. Sistema de Retrocompatibilitat
-
-**Funcionament automàtic:**
-- Si existeixen les noves pestanyes (Alumnes, Informes, Admins) → les utilitza
-- Si NO existeixen → continua utilitzant la pestanya "webapp" antiga
-- Transició transparent sense canvis necessaris al codi existent
-
-### 4. Control d'Errors i Seguretat
+### 3. Control d'Errors i Seguretat
 
 **Comprovacions implementades:**
 - ✓ Detecció de pestanyes amb noms reservats existents
@@ -67,9 +60,8 @@ S'ha implementat amb èxit la millora de configuració de la webapp d'informes d
    - Dades d'exemple
    - Validació de noms reservats
 
-3. **config.js** (158 línies)
-   - Lectura de dades de les noves pestanyes
-   - Retrocompatibilitat amb pestanya "webapp"
+3. **config.js** (120 línies)
+   - Lectura de dades de les pestanyes de configuració
    - Funcions: `amIAdmin_()`, `processUrlsByEmail()`, `getNamesList()`
 
 4. **SETUP_IMPLEMENTATION.md** (169 línies)
@@ -141,11 +133,6 @@ No hi ha canvis. Els alumnes continuen accedint a la webapp de la mateixa manera
 - Validació de noms de pestanyes
 - Avisos abans de fer canvis
 
-### 🔄 Flexibilitat
-- Retrocompatibilitat completa
-- Transició gradual possible
-- No trenca funcionalitat existent
-
 ### 📊 Organització
 - Configuració separada i clara
 - Cada tipus de dada a la seva pestanya
@@ -172,14 +159,7 @@ No hi ha canvis. Els alumnes continuen accedint a la webapp de la mateixa manera
    - [ ] Intenta crear les pestanyes amb el menú
    - [ ] Verifica que mostra l'error de conflicte
 
-3. **Retrocompatibilitat**
-   - [ ] Prova amb pestanya "webapp" antiga → funciona
-   - [ ] Crea noves pestanyes
-   - [ ] Verifica que ara llegeix de les noves pestanyes
-   - [ ] Elimina noves pestanyes
-   - [ ] Verifica que torna a llegir de "webapp"
-
-4. **Funcionalitat webapp**
+3. **Funcionalitat webapp**
    - [ ] Vista d'alumne mostra informes correctament
    - [ ] Vista d'admin funciona correctament
    - [ ] Permisos d'admin es verifiquen correctament
@@ -195,23 +175,9 @@ No hi ha canvis. Els alumnes continuen accedint a la webapp de la mateixa manera
    - [ ] NO veu el menú de setup
    - [ ] Pot continuar usant la webapp normalment
 
-## Compatibilitat
-
-| Component | Versió Antiga | Versió Nova | Compatible |
-|-----------|--------------|-------------|------------|
-| Pestanya webapp | ✓ Utilitzada | ○ Opcional | ✅ Sí |
-| Noves pestanyes | ✗ No existien | ✓ Recomanades | ✅ Sí |
-| Codi webapp | ✓ Funcional | ✓ Millorat | ✅ Sí |
-| Vista alumne | ✓ Igual | ✓ Igual | ✅ Sí |
-| Vista admin | ✓ Igual | ✓ Igual | ✅ Sí |
-
 ## Pròxims Passos (Opcionals)
 
-1. **Migració de dades**
-   - Crear eina per copiar dades de "webapp" a noves pestanyes
-   - Validar que les dades s'han copiat correctament
-
-2. **Millores futures**
+1. **Millores futures**
    - Validació de dades (formats d'email, URLs)
    - Importació/exportació de configuració
    - Còpies de seguretat automàtiques
@@ -228,6 +194,6 @@ La implementació s'ha completat amb èxit seguint totes les etapes definides a 
 
 ✅ **Etapa 1**: Menú de setup implementat amb funcions operatives
 ✅ **Etapa 2**: Creació automàtica de pestanyes amb format professional
-✅ **Etapa 3**: Actualització de la lògica amb retrocompatibilitat
+✅ **Etapa 3**: Actualització de la lògica per utilitzar les noves pestanyes
 
-El sistema està llest per ser utilitzat i manté la compatibilitat completa amb configuracions existents.
+El sistema està llest per ser utilitzat amb les noves pestanyes de configuració.

@@ -10,7 +10,7 @@ The implementation consists of three new Google Apps Script files:
 
 1. **menu.js** - Menu management and user interface
 2. **setup.js** - Sheet creation and formatting logic
-3. **config.js** - Configuration data reading with backward compatibility
+3. **config.js** - Configuration data reading
 
 ### Key Components
 
@@ -65,27 +65,23 @@ The implementation consists of three new Google Apps Script files:
 
 #### 3. Configuration Reading (config.js)
 
-**Backward Compatibility Strategy**
-All functions first attempt to read from new sheets, then fall back to 'webapp' sheet:
+**Configuration Functions**
+All functions read directly from the dedicated configuration sheets:
 
 - `amIAdmin_()`: Checks if user is admin
-  - New: Reads from 'Admins' sheet, column 2 (Email)
-  - Fallback: Reads from 'webapp' sheet, column H
+  - Reads from 'Admins' sheet, column 2 (Email)
   
 - `processUrlsByEmail(userEmail)`: Gets reports for a user
-  - New: Reads from 'Informes' sheet
-  - Fallback: Reads from 'webapp' sheet
+  - Reads from 'Informes' sheet
   
 - `getNamesList()`: Gets list of students
-  - New: Reads from 'Alumnes' sheet, columns 1-2
-  - Fallback: Reads from 'webapp' sheet, columns J-L
+  - Reads from 'Alumnes' sheet, columns 1-2
 
-## Migration Path
+## Setup Process
 
 ### Phase 1: Initial Deployment
 - Deploy new files to Google Apps Script project
 - Menu appears for users with edit permissions
-- Existing 'webapp' sheet continues to work (no changes required)
 
 ### Phase 2: Configuration Sheet Creation
 - User clicks "📋 Crear pestanyes de configuració"
@@ -93,8 +89,8 @@ All functions first attempt to read from new sheets, then fall back to 'webapp' 
 - If clear, creates three new sheets with sample data
 - User replaces sample data with actual configuration
 
-### Phase 3: Automatic Transition
-- Once new sheets exist, system automatically reads from them
+### Phase 3: System Operation
+- System reads configuration from the three dedicated sheets
 - Old 'webapp' sheet is no longer used by the system
 - Can be hidden or deleted by user
 
@@ -141,11 +137,9 @@ Each sheet has a specific structure that must be maintained:
 - [ ] Reserved name conflicts are detected and reported
 - [ ] Webapp URL dialog displays correctly
 - [ ] About dialog shows version information
-- [ ] Backward compatibility works (system reads from webapp sheet if new sheets don't exist)
-- [ ] After creating new sheets, system reads from them instead of webapp sheet
+- [ ] System reads from new configuration sheets correctly
 
-### Regression Testing
-- [ ] Existing webapp functionality unchanged when using old 'webapp' sheet
+### Functional Testing
 - [ ] Admin view works correctly
 - [ ] Student view works correctly
 - [ ] Report loading works correctly
@@ -154,7 +148,6 @@ Each sheet has a specific structure that must be maintained:
 
 Potential improvements for future versions:
 - Data validation rules on configuration sheets
-- Migration tool to copy data from 'webapp' sheet to new sheets
 - Batch import from CSV files
 - Configuration export/backup functionality
 - Multi-language support for menu items
@@ -165,5 +158,4 @@ Potential improvements for future versions:
 **Version 2.0** (Current)
 - Initial setup menu implementation
 - Three-sheet configuration system
-- Backward compatibility with 'webapp' sheet
 - Automatic formatting and sample data

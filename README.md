@@ -44,11 +44,7 @@ A partir de la versió 2.0, la webapp inclou un menú de setup que facilita la c
 |-------|-------|
 | Nom de l'administrador | email@domini.cat |
 
-### Configuració manual (Mètode antic)
-
-Si preferiu configurar manualment, podeu continuar utilitzant la pestanya `webapp` amb l'estructura original (vegeu versió anterior del README).
-
-**Important:** El sistema és retrocompatible. Si no existeixen les pestanyes de configuració noves (Alumnes, Informes, Admins), la webapp continuarà llegint de la pestanya `webapp` antiga.
+**Important:** Cal crear les pestanyes de configuració (Alumnes, Informes, Admins) utilitzant el menú de setup per al correcte funcionament de la webapp.
 
 ## Funcionament
 
@@ -68,7 +64,7 @@ El menú de setup està disponible només per a usuaris amb permisos d'edició d
 ## Requisits
 
 - Accés a un compte Google.
-- El full de càlcul ha de tenir les pestanyes de configuració (`Alumnes`, `Informes`, `Admins`) o la pestanya `webapp` (mètode antic).
+- El full de càlcul ha de tenir les pestanyes de configuració (`Alumnes`, `Informes`, `Admins`).
 - Permisos d'edició al full de càlcul per accedir al menú de setup.
 
 ## Exemple d'ús
@@ -94,5 +90,4 @@ Canvis principals en la versió 2.0:
 - Afegit menú de setup amb opcions de configuració automàtica
 - Separació de la configuració en tres pestanyes independents
 - Format automàtic de les pestanyes amb capçalera i colors alternats
-- Retrocompatibilitat amb la configuració antiga
 - Diàleg per accedir directament a la webapp
