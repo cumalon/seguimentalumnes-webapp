@@ -1,114 +1,33 @@
-# Introducció
+# Webapp d'informes d'avaluació
 
-Aquest projecte consisteix en una extensió de fulls de càlcul de Google.
+Aquesta webapp permet als usuaris consultar els informes d'avaluació generats i compartits mitjançant Google Drive. El sistema està pensat perquè cada alumne o usuari accedeixi a través d'una pàgina web personalitzada, on es mostra la llista d'informes que té disponibles.
 
-L'extensió té tres funcionalitats principals:
-- Generar informes a partir de les dades d'un full de càlcul. 
-- Visualització dels informes en una webapp.
-- Enviament massiu de correus personalitzats amb adjunts.
+## Característiques
 
-Els informes són documents de text de Google.
+- **Visualització personalitzada:** Cada usuari pot veure només els informes que li han estat compartits en mode lectura.
+- **Vista admin:** Els usuaris administradors poden accedir a la llista completa d'informes i consultar els informes d'alumnes de forma agregada.
+- **Integració amb Google Sheets:** La webapp s'executa a partir d'un full de càlcul de Google que conté la taula de referència d'informes i usuaris.
+- **Compartició segura:** Els informes són documents de Google (Google Docs) compartits automàticament amb cada usuari.
+- **No requereix acció de l'alumne:** Els alumnes no han d'autoritzar permisos ni modificar res al seu Drive, només accedeixen a la web i veuen els enllaços als seus informes.
 
-La webapp genera una pàgina html on s'enllaça els informes generats. Hi ha dues visualitzacions, la vista admin o d'accés complet i la vista user o d'accés limitat.
+## Funcionament
 
+1. L'administrador genera informes d'avaluació i els comparteix amb els alumnes.
+2. Les referències als informes i als usuaris amb accés s'anoten a la pestanya `webapp` d'un full de càlcul de Google.
+3. La webapp llegeix aquesta pestanya i mostra a cada usuari la llista d'informes disponibles segons el seu correu Google.
+4. Els usuaris accedeixen a la webapp i poden consultar els seus informes de forma fàcil i segura.
 
-## Com es fa?
+## Requisits
 
-Aquesta eina realitza un procés merge entre les dades d'un full de càlcul i una plantilla predefinida.
+- Accés a un compte Google.
+- El full de càlcul ha de tenir la pestanya `webapp` amb les referències als informes i als usuaris.
 
-El procés merge consisteix en combinar la informació que conté el full de càlcul amb la plantilla, amb la finalitat de generar documents o informes personalitzats. Aquest procés permet visualitzar dades estructurades (com noms, adreces, qualificacions o altres valors) en diferents documents o formats mantenint un estil uniforme.
+## Exemple d'ús
 
-**Full de càlcul:** conté les dades en forma de taula, on cada fila representa una entrada individual (com una persona o un projecte) i cada columna un camp d'informació (com el nom, l'adreça, etc.).
+- Un professor genera informes per a cada alumne i els comparteix automàticament amb el correu de cada alumne.
+- Els alumnes accedeixen a la webapp i veuen només els seus informes.
 
-**Plantilla:** és un document pre-formatat amb un disseny estàtic, on s'han definit espais reservats o placeholders (com {{Nom}}, {{Data}}, etc.) que seran substituïts per les dades del full de càlcul.
+## Instal·lació
 
-**Procés de merge:** s’utilitza un programa (com Microsoft Word amb el seu correu massiu o aplicacions de Google Workspace) per fer el merge, agafant cada fila del full de càlcul i substituint els placeholders de la plantilla amb els valors corresponents de cada fila.
+La webapp s'ha de desplegar com a Google Apps Script associat al full de càlcul on es gestionen els informes.
 
-El resultat és una sèrie de documents generats automàticament on cada un conté les dades personalitzades de cada fila del full de càlcul.
-
-### Fulls i camps importants
-
-Les dades d'un merge han d'estar totes elles en una sola pestanya del full de càlcul. El full pot tenir qualsevol nom. Els noms de les capçaleres són lliures per realitzar un procés de merge, però no és així quan s'executa la webapp. La webapp buscarà els camps **EMAIL** i **Cognoms, Nom**.
-
-**EMAIL:** quan posem aquest camp en una de les columnes d'un merge, el document generat de cada fila es comparteix en mode lectura amb el correu proporcionat. La webapp s'ha d'executar des d'un usuari Google, de manera que, per defecte, només es visualitza els informes generats i compartits amb l'usuari en concret. Això permet que, en una graella de qualificacions d'un grup d'alumnes per exemple, un estudiant visualitzi únicament les seves qualificacions.
-
-**Cognoms, Nom**: quan un usuari admin executa la webapp aquest pot accedir als informes generats per a múltiples files del full de dades. En aquest cas, apareix un selector on es pot escollit el Cognom, Nom del qual es vol visualitzar els informes. Aquesta seria la vista que podria veure el professorat de l'exemple acadèmic mencionat abans.
-
-Els informes accessibles des de la webapp es llisten a una taula de dades del full amb noma **webapp** (cal veure exemples). Aquest mateix full també conté la taula d'usuaris Google amb accés admin i la taula amb els Cognoms, Nom que es podran seleccionar des de la visualització admin.
-
-
-## Enviament massiu de correus
-
-L'extensió permet enviar correus electrònics personalitzats de forma massiva a partir d'una pestanya de dades del full de càlcul.
-
-### Característiques principals:
-
-- **Destinataris amb columnes reservades**: 
-  - **EMAIL** (obligatòria): Columna amb els destinataris principals
-  - **EMAIL_CC** (opcional): Columna amb còpies visibles
-  - **EMAIL_BCC** (opcional): Columna amb còpies ocultes
-  - Cada cel·la pot contenir múltiples adreces separades per comes (,) o punt i coma (;)
-
-- **Personalització amb tags**: El cos del correu pot contenir tags en format `<<NomTag>>` que s'associen automàticament o manualment amb les capçaleres de la pestanya.
-
-- **Adjunts des d'URLs**: Es poden afegir adjunts indicant URLs en columnes específiques de la pestanya. El sistema converteix automàticament diversos formats a PDF:
-  - Google Docs → PDF
-  - MS Word (.doc, .docx) → PDF
-  - MS Excel (.xls, .xlsx) → PDF
-  - PDFs i altres fitxers s'envien tal qual
-
-- **Programació d'enviament**: Els correus es poden enviar immediatament (per defecte), programar amb una demora o seleccionant una data i hora específiques.
-
-- **Control de quotes**: Abans d'enviar, el sistema verifica la quota diària disponible i mostra informació detallada per evitar errors.
-
-- **Registre d'enviaments**: L'estat de cada enviament es registra automàticament en una columna de log (`EMAIL_LOG`) a la pestanya de dades.
-
-### Requisits:
-
-**IMPORTANT**: Per convertir documents MS Word i Excel a PDF, cal activar la Drive API:
-
-1. A l'editor d'Apps Script, obre el menú "Serveis" (icona +)
-2. Cerca "Drive API" i activa-la
-3. També cal activar-la a Google Cloud Console si es demana
-
-### Com utilitzar-ho:
-
-#### Preparació de la pestanya:
-
-1. Crea una columna anomenada **EMAIL** amb les adreces dels destinataris (obligatòria)
-2. Opcionalment, crea columnes **EMAIL_CC** i/o **EMAIL_BCC** per còpies
-3. Cada cel·la pot contenir múltiples emails separats per comes o punt i coma:
-   - Exemple: `joan@example.com, maria@example.com`
-   - Exemple: `pere@example.com; anna@example.com`
-
-#### Enviament:
-
-1. Obre el menú "Alumnes" i selecciona "Enviament massiu"
-2. Selecciona la pestanya de dades i indica la fila de capçalera
-3. Redacta l'assumpte i el cos del correu utilitzant tags (ex: `<<Nom>>`, `<<Nota>>`)
-4. Mapeja els tags amb les capçaleres corresponents de la pestanya
-5. Opcionalment, selecciona columnes amb URLs d'adjunts
-6. Configura quan s'enviarà el correu (immediat, demora o data/hora específica)
-7. Revisa la informació de quotes i envia
-
-Els correus s'enviaran segons la configuració establerta i es registrarà l'estat de cada enviament a la columna `EMAIL_LOG`.
-
-# Us de clasp
-
-Els projectes d'Apps Script es poden gestionar localment a través de clasp. En aquest web es fa un resum de les funcionalitats més importants:
-
- https://developers.google.com/apps-script/guides/clasp
-
-Clasp permet sincronitzar un projecte en local amb un sol projecte Apps Script associat a un fitxer del Drive (el contenidor, en llenguatge Google).
-
-Pot passar que un mateix projecte Apps Script es vulgui fer servir en diferents fitxers del Drive. Per exemple, potser el nostre projecte es fa servir a diversos fulls de càlcul. En aquest cas, cada full de càlcul requerirà el seu propi projecte (independent), és a dir que el fitxer Drive contindrà una còpia del codi (es poden veure a script.google.com o des del menú del mateix fitxer via Extensions->Apps Script). Cadascun d'aquests projectes té la seva pròpia scriptId. Amb aquest valor es pot canviar el projecte amb el que clasp realitza la sincronització.
-
-Per canviar la ID del projecte a clasp cal executar la següent comanda:
- clasp setting scriptId AQUÍ_LA_ID_NOVA
-
-
-# Us de git:
-
-Com que la gestió del projecte es fa localment i no a través de l'editor de scripts de Google, es pot fer servir git per gestionar les versions del codi. En concret el codi està versionat a través de github:
-
- https://github.com/cumalon/qualificacions
