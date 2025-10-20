@@ -1,4 +1,4 @@
-// NOTA: Aquesta funció s'ha mogut a config.gs per mantenir la retrocompatibilitat
+// NOTA: Aquesta funció s'ha mogut a config.js per mantenir la retrocompatibilitat
 // i suportar tant les noves pestanyes de configuració com la pestanya "webapp" antiga
 
 function getIndexPageName_() {
@@ -23,7 +23,7 @@ function processUrls() {
   return processUrlsByEmail(userEmail);
 }
 
-// NOTA: Aquesta funció s'ha mogut a config.gs per mantenir la retrocompatibilitat
+// NOTA: Aquesta funció s'ha mogut a config.js per mantenir la retrocompatibilitat
 // i suportar tant les noves pestanyes de configuració com la pestanya "webapp" antiga
 
 function getUserEmail() {
@@ -36,5 +36,5 @@ function getUserName() {
     return name;
 }
 
-// NOTA: Aquesta funció s'ha mogut a config.gs per mantenir la retrocompatibilitat
+// NOTA: Aquesta funció s'ha mogut a config.js per mantenir la retrocompatibilitat
 // i suportar tant les noves pestanyes de configuració com la pestanya "webapp" antiga

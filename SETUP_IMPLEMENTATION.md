@@ -8,13 +8,13 @@ This document provides a technical overview of the setup menu and configuration 
 ### File Structure
 The implementation consists of three new Google Apps Script files:
 
-1. **menu.gs** - Menu management and user interface
-2. **setup.gs** - Sheet creation and formatting logic
-3. **config.gs** - Configuration data reading with backward compatibility
+1. **menu.js** - Menu management and user interface
+2. **setup.js** - Sheet creation and formatting logic
+3. **config.js** - Configuration data reading with backward compatibility
 
 ### Key Components
 
-#### 1. Menu System (menu.gs)
+#### 1. Menu System (menu.js)
 
 **onOpen() Trigger**
 - Automatically creates the "⚙️ Setup Webapp" menu when the spreadsheet is opened
@@ -30,7 +30,7 @@ The implementation consists of three new Google Apps Script files:
 - `showAboutDialog()`: Shows version and system information
 - `getWebappUrl()`: Retrieves the deployed webapp URL
 
-#### 2. Sheet Setup System (setup.gs)
+#### 2. Sheet Setup System (setup.js)
 
 **Reserved Sheet Names**
 - Alumnes
@@ -63,7 +63,7 @@ The implementation consists of three new Google Apps Script files:
 - Optimized column widths
 - Sheets positioned at leftmost position (index 0)
 
-#### 3. Configuration Reading (config.gs)
+#### 3. Configuration Reading (config.js)
 
 **Backward Compatibility Strategy**
 All functions first attempt to read from new sheets, then fall back to 'webapp' sheet:

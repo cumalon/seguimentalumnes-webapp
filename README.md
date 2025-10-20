@@ -82,7 +82,7 @@ El menú de setup està disponible només per a usuaris amb permisos d'edició d
 La webapp s'ha de desplegar com a Google Apps Script associat al full de càlcul on es gestionen els informes.
 
 1. Creeu un nou projecte de Google Apps Script associat al vostre full de càlcul.
-2. Copieu tots els fitxers `.gs`, `.html` i `.json` del repositori al vostre projecte.
+2. Copieu tots els fitxers `.js`, `.html` i `.json` del repositori al vostre projecte.
 3. Desplegeu la webapp com a aplicació web.
 4. Utilitzeu el menú de setup per configurar les pestanyes de configuració.
 

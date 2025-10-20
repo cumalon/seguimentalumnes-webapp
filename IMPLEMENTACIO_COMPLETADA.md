@@ -56,18 +56,18 @@ S'ha implementat amb èxit la millora de configuració de la webapp d'informes d
 
 ### Nous Fitxers Creats
 
-1. **menu.gs** (107 línies)
+1. **menu.js** (107 línies)
    - Funció `onOpen()`: Crea el menú automàticament
    - Funcions de diàlegs (webapp URL, informació)
    - Gestió de permisos
 
-2. **setup.gs** (230 línies)
+2. **setup.js** (230 línies)
    - Creació de les tres pestanyes
    - Format automàtic (colors, fonts, capçaleres)
    - Dades d'exemple
    - Validació de noms reservats
 
-3. **config.gs** (158 línies)
+3. **config.js** (158 línies)
    - Lectura de dades de les noves pestanyes
    - Retrocompatibilitat amb pestanya "webapp"
    - Funcions: `amIAdmin_()`, `processUrlsByEmail()`, `getNamesList()`
@@ -82,7 +82,7 @@ S'ha implementat amb èxit la millora de configuració de la webapp d'informes d
 
 1. **webapp_service.js** (77 línies eliminades, 3 línies afegides)
    - Eliminades implementacions inline de les funcions de configuració
-   - Afegides referències a `config.gs`
+   - Afegides referències a `config.js`
    - Manté compatibilitat completa
 
 2. **README.md** (+69 línies)
@@ -101,7 +101,7 @@ Net: +664 línies
 ```
 
 **Distribució:**
-- Codi nou: 495 línies (.gs files)
+- Codi nou: 495 línies (.js files)
 - Documentació: 240 línies (.md files)
 - Codi refactoritzat: -74 línies
 
