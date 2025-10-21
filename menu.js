@@ -55,19 +55,27 @@ function openWebappDialog() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var webappUrl = getWebappUrl();
   
-  var html = HtmlService.createHtmlOutput(
-    '<div style="font-family: Arial, sans-serif; padding: 20px;">' +
-    '<h2 style="color: #4CAF50;">Webapp d\'Informes</h2>' +
-    '<p>Feu clic a l\'enllaç per obrir la webapp:</p>' +
-    '<p><a href="' + webappUrl + '" target="_blank" style="color: #4CAF50; font-size: 16px;">' +
-    '🔗 Obrir Webapp d\'Informes</a></p>' +
-    '<p style="color: #666; font-size: 12px;">Nota: L\'enllaç s\'obrirà en una nova pestanya del navegador.</p>' +
-    '</div>'
-  )
-  .setWidth(400)
-  .setHeight(200);
-  
-  SpreadsheetApp.getUi().showModalDialog(html, 'Accés a la Webapp');
+  if (webappUrl) {
+    var html = HtmlService.createHtmlOutput(
+      '<div style="font-family: Arial, sans-serif; padding: 20px;">' +
+      '<h2 style="color: #4CAF50;">Webapp d\'Informes</h2>' +
+      '<p>Feu clic a l\'enllaç per obrir la webapp:</p>' +
+      '<p><a href="' + webappUrl + '" target="_blank" style="color: #4CAF50; font-size: 16px;">' +
+      '🔗 Obrir Webapp d\'Informes</a></p>' +
+      '<p style="color: #666; font-size: 12px;">Nota: L\'enllaç s\'obrirà en una nova pestanya del navegador.</p>' +
+      '</div>'
+    )
+    .setWidth(400)
+    .setHeight(200);
+    
+    SpreadsheetApp.getUi().showModalDialog(html, 'Accés a la Webapp');
+  } else {
+    SpreadsheetApp.getUi().alert(
+      'Error',
+      'No s\'ha pogut obtenir la URL de la webapp. Si us plau, assegureu-vos que la pestanya "Admins" està configurada correctament amb la ID del desplegament.',
+      SpreadsheetApp.getUi().ButtonSet.OK
+    );
+  }
 }
 
 /**
@@ -75,10 +83,22 @@ function openWebappDialog() {
  * @return {string} URL de la webapp
  */
 function getWebappUrl() {
-  // Aquesta URL s'ha de configurar amb la URL real del desplegament
-  // Per defecte, retorna un missatge informatiu
-  var url = ScriptApp.getService().getUrl();
-  return url || 'URL no configurada';
+  // En principi
+  //   var url = ScriptApp.getService().getUrl();
+  // intentar obtenir la URL del servei però hi ha un bug a ScriptApp
+  // i no hi ha manera de retornar la id de l'últim desplegament així
+  // que per ara es llegeix la id des de la pestanya Admins on posem 
+  // la id manualment.
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const adminsSheet = ss.getSheetByName('Admins');
+  var url = null;
+  if (adminsSheet) {
+    deploymentId = adminsSheet.getRange('C2').getValue();
+    if (deploymentId != '') {
+      url = "https://script.google.com/a/macros/inspladelestany.cat/s/" + deploymentId + "/exec";
+    }
+  }
+  return url;
 }
 
 /**
