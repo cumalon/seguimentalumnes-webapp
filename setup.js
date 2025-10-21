@@ -9,10 +9,6 @@ var RESERVED_SHEET_NAMES = ['Alumnes', 'Informes', 'Admins'];
 // Color de la capçalera
 var HEADER_COLOR = '#4CAF50';
 
-// Colors per a files alternades
-var ROW_COLOR_1 = '#FFFFFF';
-var ROW_COLOR_2 = '#F5F5F5';
-
 /**
  * Comprova si existeixen pestanyes amb noms reservats
  * @return {Array} Array amb els noms de les pestanyes reservades que existeixen
@@ -97,7 +93,7 @@ function createAlumnesSheet() {
   sheet.setColumnWidth(1, 200);
   sheet.setColumnWidth(2, 250);
   
-  // Afegir files d'exemple amb format alternat
+  // Afegir files d'exemple
   addSampleDataAlumnes(sheet);
   
   // Congelar la fila de capçalera
@@ -117,12 +113,6 @@ function addSampleDataAlumnes(sheet) {
   
   if (sampleData.length > 0) {
     sheet.getRange(2, 1, sampleData.length, 2).setValues(sampleData);
-    
-    // Aplicar colors alternats
-    for (var i = 0; i < sampleData.length; i++) {
-      var color = (i % 2 === 0) ? ROW_COLOR_1 : ROW_COLOR_2;
-      sheet.getRange(i + 2, 1, 1, 2).setBackground(color);
-    }
   }
 }
 
@@ -151,7 +141,7 @@ function createInformesSheet() {
   sheet.setColumnWidth(4, 150);
   sheet.setColumnWidth(5, 100);
   
-  // Afegir files d'exemple amb format alternat
+  // Afegir files d'exemple
   addSampleDataInformes(sheet);
   
   // Congelar la fila de capçalera
@@ -170,12 +160,6 @@ function addSampleDataInformes(sheet) {
   
   if (sampleData.length > 0) {
     sheet.getRange(2, 1, sampleData.length, 5).setValues(sampleData);
-    
-    // Aplicar colors alternats
-    for (var i = 0; i < sampleData.length; i++) {
-      var color = (i % 2 === 0) ? ROW_COLOR_1 : ROW_COLOR_2;
-      sheet.getRange(i + 2, 1, 1, 5).setBackground(color);
-    }
   }
 }
 
@@ -187,7 +171,7 @@ function createAdminsSheet() {
   var sheet = ss.insertSheet('Admins', 0);
   
   // Capçalera
-  var headers = ['Admin', 'Email'];
+  var headers = ['Admin', 'Email','Deployment Id'];
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
   
   // Format de capçalera
@@ -201,7 +185,7 @@ function createAdminsSheet() {
   sheet.setColumnWidth(1, 200);
   sheet.setColumnWidth(2, 250);
   
-  // Afegir files d'exemple amb format alternat
+  // Afegir files d'exemple
   addSampleDataAdmins(sheet);
   
   // Congelar la fila de capçalera
@@ -214,17 +198,6 @@ function createAdminsSheet() {
  * Afegeix dades d'exemple a la pestanya Admins
  */
 function addSampleDataAdmins(sheet) {
-  var sampleData = [
-    ['Joan Lopez', 'joanlopez@inspladelestany.cat']
-  ];
-  
-  if (sampleData.length > 0) {
-    sheet.getRange(2, 1, sampleData.length, 2).setValues(sampleData);
-    
-    // Aplicar colors alternats
-    for (var i = 0; i < sampleData.length; i++) {
-      var color = (i % 2 === 0) ? ROW_COLOR_1 : ROW_COLOR_2;
-      sheet.getRange(i + 2, 1, 1, 2).setBackground(color);
-    }
-  }
+  var sampleData = ['Joan Lopez', 'joanlopez@inspladelestany.cat','AKDycDyKjQG6g5x7M-ck3g6C4GasJsjNyeQfBgL8k7y_Z0zcLKL9BVg9OWyiStZg0v_5ndZx'];
+  sheet.getRange(2, 1, 1, sampleData.length).setValues([sampleData]);
 }
